@@ -29,7 +29,7 @@ int pressure = 0;
 int avgPressure = 0;
 
 unsigned long lastPublishTime = 0;
-const long publishInterval = 500; // 500 ms = 0.5 seconds
+const long publishInterval = 1000; // 1000 ms = 1 seconds
 
 volatile bool newDataAvailable = false;
 

@@ -1,5 +1,6 @@
 # nogasm-bridge
 Home assistant auto discovery bridge for nogasm. Paired with nogasm-i2c
+Also includes updated casing
 
 ## Prerequisite
 - you soldered the teensy LC in the i2c repo
