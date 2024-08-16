@@ -131,7 +131,7 @@ void publishDiscoveryMessages()
   doc["command_topic"] = speedSetTopic;
   doc["state_topic"] = motorSpeedTopic;
   doc["min"] = 0;
-  doc["max"] = 134;
+  doc["max"] = 179;
   doc["step"] = 1;
   doc["unique_id"] = "nogasm_motor_speed_control";
 
