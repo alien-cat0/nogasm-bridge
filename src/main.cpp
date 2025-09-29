@@ -3,15 +3,15 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
+#include <WiFiManager.h>
 
 #define I2C_SLAVE_ADDR 0x08 // Must match the address used in Teensy code
 
-// WiFi credentials
-const char *ssid = "XXX";
-const char *password = "XXX";
+#define WIFI_AP_NAME "x"
+#define WIFI_AP_PASSWORD "x"
 
 // MQTT Broker settings
-const char *mqtt_server = "XXX";
+const char *mqtt_server = "x";
 const int mqtt_port = 1883;
 
 // MQTT topics
@@ -22,6 +22,7 @@ const char *speedSetTopic = "homeassistant/number/motorspeed/set";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
+WiFiManager wifiManager;
 
 int motorSpeed = 0;
 int newSpeed = 0;
@@ -81,14 +82,7 @@ void setMotorSpeed(int speed)
 
 void setup_wifi()
 {
-  delay(10);
-  Serial.println("Connecting to WiFi...");
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.print(".");
-  }
+  wifiManager.autoConnect(WIFI_AP_NAME, WIFI_AP_PASSWORD);
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
@@ -138,6 +132,7 @@ void publishDiscoveryMessages()
   serializeJson(doc, buffer);
   client.publish("homeassistant/number/motorspeed/config", buffer, true);
 }
+
 void reconnect()
 {
   while (!client.connected())
